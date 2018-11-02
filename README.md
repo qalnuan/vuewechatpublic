@@ -1,5 +1,5 @@
 # vuewechatpublic
-vue公众号工程
+券淘vue公众号工程
 
 ### 简介
 ```
