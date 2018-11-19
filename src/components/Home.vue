@@ -1,35 +1,45 @@
 <template>
 <el-container>
-  <el-header style="height:40px;">
+  <el-header style="height:24px;">
     <el-row :gutter="20" style="height:40px;">
-      <el-col :span="10">
-        <div style="height:100%">
-          <img src="../assets/logo.png">
+      <el-col :span="10" style="height:40px;">
+        <div style="height:100%;">
+          <!-- <img src="../assets/logo.png" style="margin-top:2px;"> -->
+          <span style="text-align:center;">福州劵淘网</span>
         </div>
       </el-col>
       <el-col :span="10" style="float:right;">
         <div style="float:right;height:100%;text-align:center;">
-          <i class="el-icon-search"></i>
-          <i class="icon-el-icon-third-user"></i>
+          <el-button icon="el-icon-search" circle plain></el-button>
+          <el-button icon="icon-el-icon-third-user" circle plain></el-button>
         </div>
       </el-col>
     </el-row>
   </el-header>
 
   <el-main>
-    <el-carousel :interval="5000" arrow="hover">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
-      </el-carousel-item>
+    <el-carousel :interval="3000" arrow="hover">
+      <el-carousel-item v-for="item in backImgs" :key="item">
+        <img style="width:100%;height:100%" :src="item.url" />
+        </el-carousel-item>
     </el-carousel>
-    <el-table>
-      <el-table-column prop="date" label="日期" width="140">
-      </el-table-column>
-      <el-table-column prop="name" label="姓名" width="120">
-      </el-table-column>
-      <el-table-column prop="address" label="地址">
-      </el-table-column>
-    </el-table>
+    <el-row style="margin-top:12px;">
+      <el-col v-for="o in 2" :key="o">
+        <el-card :body-style="{ padding: '0px' }">
+          <img src="../assets/product.jpg" class="image">
+          <div style="position:absolute; z-index:2; background-color:rgba(0, 0, 0, 0.5); top:5px;color:white;">
+            销售量
+          </div>
+          <div style="padding: 14px;">
+            <span>好吃的汉堡</span>
+            <div class="bottom clearfix">
+              <time class="time">{{ currentDate }}</time>
+              <el-button type="text" class="button">操作按钮</el-button>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
   </el-main>
 </el-container>
 </template>
@@ -39,7 +49,16 @@ export default {
   name: "Home",
   data() {
     return {
-      item: {}
+      backImgs: [{
+          url: "./static/bg1.jpg"
+        },
+        {
+          url: "./static/bg2.jpg"
+        },
+        {
+          url: "./static/bg3.png"
+        }
+      ]
     };
   }
 };
@@ -48,6 +67,17 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
+.badge-item {
+  float: left;
+  margin-top: 10px;
+  margin-right: 40px;
+}
+
+.image {
+  width: 100%;
+  display: block;
+}
+
 .el-carousel__item h3 {
   color: #475669;
   font-size: 14px;

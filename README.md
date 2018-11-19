@@ -2,33 +2,11 @@
 
 > 券淘公众号
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
+### 微信公众号开发
+* vue开发微信公众号<https://www.jianshu.com/p/5ae97f0bd31e?utm_campaign=haruki&utm_content=note&utm_medium=reader_share&utm_source=weixin>
+* 如何在Vue项目中使用vw实现移动端适配<https://www.jianshu.com/p/1f1b23f8348f>
+* vue做微信公众号分享,支付<https://blog.csdn.net/qq_36977381/article/details/78903308>
+* 微信公众号+vue+微信支付<https://blog.csdn.net/xxuncle/article/details/80997796>
 
 ### 简介
 ```
