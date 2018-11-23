@@ -24,7 +24,21 @@
           <img style="width:100%;height:100%" :src="item.url" />
         </el-carousel-item>
       </el-carousel>
-      <el-row style="margin-top:12px;">
+      <el-card class="box-card">
+        <el-row :gutter="30">
+          <el-col :span="6" v-for="item in selectItems" :key="item">
+            <div class="select-div">
+              <img :src="item.image" class="select-img">
+              <div><span>{{item.title}}</span></div>
+            </div>
+          </el-col>
+        </el-row>
+      </el-card>
+      <div class="more-title el-card__header el-card">
+        <span>全部产品</span>
+        <el-button style="float: right; padding: 3px 0" type="text">查看更多</el-button>
+      </div>
+      <el-row>
         <el-col v-for="o in 5" :key="o">
           <el-card :body-style="{ padding: '0px' }">
             <el-row>
@@ -80,6 +94,35 @@ export default {
         {
           url: "./static/bg3.png"
         }
+      ],
+      selectItems: [{
+          image: "./static/btn.png",
+          title: "专区1"
+        },
+        {
+          image: "./static/btn.png",
+          title: "专区2"
+        },
+        {
+          image: "./static/btn.png",
+          title: "专区3"
+        },
+        {
+          image: "./static/btn.png",
+          title: "专区4"
+        },
+        {
+          image: "./static/btn.png",
+          title: "专区5"
+        },
+        {
+          image: "./static/btn.png",
+          title: "专区6"
+        },
+        {
+          image: "./static/btn.png",
+          title: "专区7"
+        }
       ]
     };
   },
@@ -97,6 +140,22 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
+.more-title {
+  margin-top: 8px;
+  background-color: white;
+}
+
+.select-div {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 13px;
+}
+
+.select-img {
+  width: 100%;
+}
+
 .container-home {
   padding: 0px;
   margin: 0px;
