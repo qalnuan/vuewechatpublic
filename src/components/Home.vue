@@ -12,7 +12,7 @@
         <el-col :span="10" style="float:right;">
           <div style="float:right;height:100%;text-align:center;">
             <el-button icon="el-icon-search" circle plain v-on:click="goSearch"></el-button>
-            <el-button icon="icon-el-icon-third-user" circle plain></el-button>
+            <el-button icon="icon-el-icon-third-user" circle plain v-on:click="goUser"></el-button>
           </div>
         </el-col>
       </el-row>
@@ -35,12 +35,12 @@
         </el-row>
       </el-card>
       <div class="more-title el-card__header el-card">
-        <span>全部产品</span>
-        <el-button style="float: right; padding: 3px 0" type="text">查看更多</el-button>
+        <span style="font-size:14px;">全部产品</span>
+        <el-button style="float: right; padding: 3px 0" type="text">查看更多>></el-button>
       </div>
       <el-row>
         <el-col v-for="o in 5" :key="o">
-          <el-card :body-style="{ padding: '0px' }">
+          <el-card :body-style="{ padding: '0px' }" @click.native="goDetail(o)">
             <el-row>
               <el-col :span="10" style="margin-top: 12px;">
                 <div style="position:absolute; z-index:2; background-color:rgba(0, 0, 0, 0.5); color:white;">
@@ -132,6 +132,20 @@ export default {
     },
     searchToHome: function (event) {
       this.isSearch = true;
+    },
+    goDetail: function (event, item) {
+      this.$router.push({
+        path: "/detail",
+        name: "Detail",
+        params: {}
+      });
+    },
+    goUser: function (event) {
+      this.$router.push({
+        path: "/user",
+        name: "User",
+        params: {}
+      });
     }
   }
 };
