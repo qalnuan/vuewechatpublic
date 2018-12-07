@@ -7,6 +7,7 @@
 * 如何在Vue项目中使用vw实现移动端适配<https://www.jianshu.com/p/1f1b23f8348f>
 * vue做微信公众号分享,支付<https://blog.csdn.net/qq_36977381/article/details/78903308>
 * 微信公众号+vue+微信支付<https://blog.csdn.net/xxuncle/article/details/80997796>
+* 如何设置微信公众号的测试号的菜单<https://blog.csdn.net/hqsary/article/details/82347862>
 
 ### 简介
 ```

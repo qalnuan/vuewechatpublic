@@ -7,6 +7,7 @@ import User from '@/components/User'
 Vue.use(Router)
 
 export default new Router({
+  base: process.env.VUE_APP_API_URL,
   routes: [{
     path: '/',
     name: 'Home',
