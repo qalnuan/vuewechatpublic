@@ -1,59 +1,54 @@
 <template>
-<div style="width:100%;height:100%;background-color: #f5f5f5;">
+<div style="width: 100%;height: 100%;background-color: #f5f5f5;">
   <div class="my_head">
     <div class="info">
-      <img class="hp" src="https://speed.lhs11.com/fxc/img/tou.png" alt>
+      <img class="hp" src="../assets/tou.png" alt>
       <p class="name">这是一个很长的名字</p>
     </div>
   </div>
-
-  <div class="my_content" style="margin-top:68px;">
-    <div class="more-title el-card__header el-card">
-      <a href="javascript:;" class="nav_item">
-          <i class="icon"></i>我的订单
-          <span class="lookAll">
-            查看全部
-            <i class="sign"></i>
-          </span>
-        </a>
+  <div class="my_content">
+    <div class="el-card__header el-card more-title">
+      <i class="icon"></i><span class="title-font">我的订单</span>
+      <span class="lookAll">
+        <span class="title-font-right">查看全部</span>
+        <i class="sign"></i>
+      </span>
     </div>
-      <div class="nav_item_son">
-        <ul class="clearfloat flex-box">
-          <li class="flex-one">
-            <p>
-              <img src="https://speed.lhs11.com/fxc/img/u_nav1-1.png" alt>
-              <span></span>
-            </p>待支付
-          </li>
-          <li class="flex-one">
-            <p>
-              <img src="https://speed.lhs11.com/fxc/img/u_nav1-2.png" alt>
-              <span></span>
-            </p>待发货
-          </li>
-          <li class="flex-one">
-            <p>
-              <img src="https://speed.lhs11.com/fxc/img/u_nav1-3.png" alt>
-              <span></span>
-            </p>已发货
-          </li>
-          <li class="flex-one">
-            <p>
-              <img src="https://speed.lhs11.com/fxc/img/u_nav1-4.png" alt>
-              <span></span>
-            </p>其他
-          </li>
-        </ul>
-      </div>
+    <div class="nav_item_son">
+      <ul class="clearfloat flex-box">
+        <li class="flex-one">
+          <p>
+            <img src="../assets/u_nav1-1.png" alt>
+            <span>待支付</span>
+          </p>
+        </li>
+        <li class="flex-one">
+          <p>
+            <img src="../assets/u_nav1-2.png" alt>
+            <span>待发货</span>
+          </p>
+        </li>
+        <li class="flex-one">
+          <p>
+            <img src="../assets/u_nav1-3.png" alt>
+            <span>已发货</span>
+          </p>
+        </li>
+        <li class="flex-one">
+          <p>
+            <img src="../assets/u_nav1-4.png" alt>
+            <span>其他</span>
+          </p>
+        </li>
+      </ul>
     </div>
-    <div class="my_content_info">
-      <a href="javascript:set()" class="nav_item">
-          <i class="icon set"></i>设置
-          <span class="lookAll">
-            <i class="sign"></i>
-          </span>
-        </a>
-    </div>
+  </div>
+  <div class="more-title el-card__header el-card">
+    <i class="icon set"></i><span class="title-font">设置</span>
+    <span class="lookAll">
+      <i class="sign"></i>
+    </span>
+  </div>
 </div>
 </template>
 
@@ -70,9 +65,24 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
+.more-title {
+  font-size: 24px;
+}
+
+.title-font {
+  font-size: 24px;
+  padding-left: 15px;
+  position: relative;
+  bottom: 5px;
+}
+.title-font-right {
+  position: relative;
+  bottom: 0px;
+}
+
 .my_head {
   padding: 70px 0;
-  background: url(https://speed.lhs11.com/fxc/img/my_bg.png) no-repeat center center;
+  background: url(../assets/my_bg.png) no-repeat center center;
   background-size: 100% 100%;
   position: relative;
   margin-bottom: 52px;
@@ -95,8 +105,83 @@ export default {
   border: 1px solid #ffab31;
   display: block;
   margin: 0 auto 10px;
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
 }
 
+.my_content {
+  margin-top: 132px;
+}
+
+.icon {
+  background: url(../assets/my_nav1.png) no-repeat center center;
+  background-size: 100% 100%;
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  margin: auto;
+}
+
+.lookAll {
+  float: right;
+  color: #b3b3b3;
+  font-size: 24px;
+  padding: 5px;
+}
+
+.sign {
+  background: url(../assets/icon_right.png) no-repeat center center;
+  background-size: 100% 100%;
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  margin: auto;
+}
+
+.nav_item_son {
+  padding: 15px;
+  background: #fff;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+.clearfloat {
+  zoom: 1;
+}
+
+.flex-box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.flex-one {
+  -webkit-box-flex: 1.0;
+  -moz-flex-grow: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  flex: 1;
+  text-align: center;
+}
+
+.my_content .my_content_info .nav_item_son ul li {
+  float: left;
+  text-align: center;
+}
+
+.flex-one img {
+  display: block;
+  margin: 0 auto 15px;
+  width: 70px;
+  height: 70px;
+}
+
+.set {
+  background-image: url(../assets/my_nav4.png);
+}
 </style>

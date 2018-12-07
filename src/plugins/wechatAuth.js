@@ -3,7 +3,7 @@ const qs = require('qs')
 const SCOPES = ['snsapi_base', 'snsapi_userinfo']
 
 class VueWechatAuthPlugin {
-  constructor () {
+  constructor() {
     this.appid = null
     this.redirect_uri = null
     this.scope = SCOPES[1]
@@ -11,7 +11,7 @@ class VueWechatAuthPlugin {
     this._redirect_uri = null
   }
 
-  install (Vue, options) {
+  install(Vue, options) {
     let wechatAuth = this
     this.setAppId(options.appid)
     Vue.mixin({
@@ -21,32 +21,32 @@ class VueWechatAuthPlugin {
     })
   }
 
-  static makeState () {
+  static makeState() {
     return Math.random().toString(36).substring(2, 15) +
       Math.random().toString(36).substring(2, 15)
   }
 
-  setAppId (appid) {
+  setAppId(appid) {
     this.appid = appid
   }
 
-  set redirect_uri (redirect_uri) {
+  set redirect_uri(redirect_uri) {
     this._redirect_uri = encodeURIComponent(redirect_uri)
   }
 
-  get redirect_uri () {
+  get redirect_uri() {
     return this._redirect_uri
   }
 
-  get state () {
+  get state() {
     return localStorage.getItem('wechat_auth:state')
   }
 
-  set state (state) {
+  set state(state) {
     localStorage.setItem('wechat_auth:state', state)
   }
 
-  get authUrl () {
+  get authUrl() {
     if (this.appid === null) {
       throw 'appid must not be null'
     }
@@ -56,8 +56,8 @@ class VueWechatAuthPlugin {
     this.state = VueWechatAuthPlugin.makeState()
     return `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.appid}&redirect_uri=${this.redirect_uri}&response_type=code&scope=${this.scope}&state=${this.state}#wechat_redirect`
   }
-  
-  get authUrl () {
+
+  get authUrl() {
     if (this.appid === null) {
       throw 'appid must not be null'
     }
@@ -71,8 +71,13 @@ class VueWechatAuthPlugin {
   returnFromWechat(redirect_uri) {
     let parsedUrl = qs.parse(redirect_uri.split('?')[1])
     if (process.env.NODE_ENV === 'development') {
-      // console.log('parsedUrl: ', parsedUrl)
+      console.log('parsedUrl: ', parsedUrl)
+      console.log('this.state: ', this.state)
+      console.log('parsedUrl.code: ', parsedUrl.code)
       this.state = null
+      if (!parsedUrl.code) {
+        throw 'You did\'t get wechat code'
+      }
       this._code = parsedUrl.code
     } else {
       if (this.state === null) {
@@ -88,7 +93,7 @@ class VueWechatAuthPlugin {
     }
   }
 
-  get code () {
+  get code() {
     if (this._code === null) {
       throw 'Not get the code from wechat server!'
     }
