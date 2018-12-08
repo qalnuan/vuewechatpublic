@@ -5,16 +5,19 @@ import store from './store/index'
 import wechatAuth from './plugins/wechatAuth' //  微信登录插件
 import './utils/rem' // rem适配
 import ElementUI from 'element-ui'
+import AllComponents from './components/index'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/icon/iconfont.css'
 
 import './assets/style/reset.css'
 Vue.use(ElementUI)
+Vue.use(AllComponents)
 
 const qs = require('qs')
 
 router.beforeEach((to, from, next) => {
   console.log(JSON.stringify(store.state))
+  store.dispatch('setLoginStatus', 2)
   if (store.state.loginStatus === '0' || store.state.loginStatus === 0) {
     console.log('未授权流程')
     //  微信未授权登录跳转到授权登录页面

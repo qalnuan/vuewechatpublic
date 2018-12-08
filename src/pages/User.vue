@@ -7,34 +7,34 @@
     </div>
   </div>
   <div class="my_content">
-    <div class="el-card__header el-card more-title">
+    <div class="el-card__header el-card more-title" v-on:click="goOrders(-1)">
       <i class="icon"></i><span class="title-font">我的订单</span>
       <span class="lookAll">
         <span class="title-font-right">查看全部</span>
-        <i class="sign"></i>
+      <i class="sign"></i>
       </span>
     </div>
     <div class="nav_item_son">
       <ul class="clearfloat flex-box">
-        <li class="flex-one">
+        <li class="flex-one" v-on:click="goOrders(2)">
           <p>
             <img src="../assets/u_nav1-1.png" alt>
-            <span>待支付</span>
-          </p>
-        </li>
-        <li class="flex-one">
-          <p>
-            <img src="../assets/u_nav1-2.png" alt>
             <span>待发货</span>
           </p>
         </li>
-        <li class="flex-one">
+        <li class="flex-one" v-on:click="goOrders(22)">
+          <p>
+            <img src="../assets/u_nav1-2.png" alt>
+            <span>发货中</span>
+          </p>
+        </li>
+        <li class="flex-one" v-on:click="goOrders(3)">
           <p>
             <img src="../assets/u_nav1-3.png" alt>
             <span>已发货</span>
           </p>
         </li>
-        <li class="flex-one">
+        <li class="flex-one" v-on:click="goOrders(-2)">
           <p>
             <img src="../assets/u_nav1-4.png" alt>
             <span>其他</span>
@@ -43,7 +43,7 @@
       </ul>
     </div>
   </div>
-  <div class="more-title el-card__header el-card">
+  <div class="more-title el-card__header el-card" v-on:click="goSet()">
     <i class="icon set"></i><span class="title-font">设置</span>
     <span class="lookAll">
       <i class="sign"></i>
@@ -58,13 +58,31 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    goOrders: function (state, event) {
+      console.log('state:' + state)
+      this.$router.push({
+        path: "/orders",
+        name: "Orders",
+        params: {
+          state: state
+        }
+      });
+    },
+    goSet: function (event) {
+      this.$router.push({
+        path: "/set",
+        name: "Set",
+        params: {}
+      });
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
-<style scoped>
+<style>
 .more-title {
   font-size: 24px;
 }
@@ -75,6 +93,7 @@ export default {
   position: relative;
   bottom: 5px;
 }
+
 .title-font-right {
   position: relative;
   bottom: 0px;
@@ -135,7 +154,8 @@ export default {
   height: 24px;
   width: 24px;
   display: inline-block;
-  margin: auto;
+  position: relative;
+  bottom: -3px;
 }
 
 .nav_item_son {
