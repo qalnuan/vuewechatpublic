@@ -2,7 +2,7 @@
 <div style="width: 100%;height: 100%;background-color: #f5f5f5;">
   <div class="my_head">
     <div class="info">
-      <img class="hp" src="../assets/tou.png" alt>
+      <img class="hp" :src="headerImg" alt>
       <p class="name">这是一个很长的名字</p>
     </div>
   </div>
@@ -56,7 +56,9 @@
 export default {
   name: "User",
   data() {
-    return {};
+    return {
+      headerImg: './static/tou.png'
+    };
   },
   methods: {
     goOrders: function (state, event) {
