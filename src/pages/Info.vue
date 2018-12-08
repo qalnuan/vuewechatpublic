@@ -33,7 +33,7 @@ export default {
   width: 400px;
   height: 400px;
   margin: 0 auto;
-  background: url(../assets/logo.png) no-repeat center center;
+  background: url(../assets/logoinfo.png) no-repeat center center;
   background-size: 320px;
 }
 

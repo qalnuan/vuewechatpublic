@@ -1,16 +1,18 @@
 <template>
 <el-container class="container-home">
   <el-container v-if="isSearch">
-    <el-header style="height:24px;margin-bottom:5px;">
-      <el-row :gutter="20" style="height:40px;">
-        <el-col :span="10" style="height:40px;">
-          <div style="height:100%;">
-            <!-- <img src="../assets/logo.png" style="margin-top:2px;"> -->
-            <span style="text-align:center;">福州劵淘网</span>
-          </div>
+    <el-header style="height: 36px; margin: 6px 0;">
+      <el-row :gutter="20">
+        <el-col :span="10">
+          <div class="title-left">
+            <div class="title-header">
+              <img src="../assets/logo.jpg"/>
+            </div>
+              <span>福州劵淘网</span>
+            </div>
         </el-col>
         <el-col :span="10" style="float:right;">
-          <div style="float:right;height:100%;text-align:center;">
+          <div class="title-right">
             <el-button icon="el-icon-search" circle plain v-on:click="goSearch"></el-button>
             <el-button icon="icon-el-icon-third-user" circle plain v-on:click="goUser"></el-button>
           </div>
@@ -35,8 +37,8 @@
         </el-row>
       </el-card>
       <div class="more-title el-card__header el-card">
-        <span style="font-size:14px;">全部产品</span>
-        <el-button style="float: right; padding: 3px 0" type="text">查看更多>></el-button>
+        <span class="all-product">全部产品</span>
+        <el-button class="look-more" type="text">查看更多>></el-button>
       </div>
       <el-row>
         <el-col v-for="o in 5" :key="o">
@@ -154,20 +156,69 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
+.look-more {
+  float: right;
+  color: #b3b3b3;
+  font-size: 24px;
+  padding: 5px;
+}
+
+.all-product {
+  font-size: 36px;
+  margin-top: 12px;
+}
+
 .more-title {
   margin-top: 8px;
   background-color: white;
+}
+
+.title-left {
+  height: 100%;
+  width: 100%;
+}
+
+.title-right {
+  float: right;
+  height: 36px;
+  margin: auto;
+  padding: 12px 0px;
+  text-align: center;
+}
+
+.title-header {
+  padding: auto;
+  height: 72px;
+  width: 72px;
+  margin: auto;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.title-left img {
+  width: 100%;
+  height: 100%;
+}
+
+.title-left span {
+  font-size: 24px;
+  margin-left: 12px;
+  position: relative;
+  bottom: 24px;
 }
 
 .select-div {
   width: 100%;
   height: 100%;
   text-align: center;
-  font-size: 13px;
+  font-size: 24px;
+  padding-bottom: 24px;
 }
 
 .select-img {
   width: 100%;
+  padding-bottom: 24px;
 }
 
 .container-home {
@@ -217,5 +268,11 @@ export default {
 
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
+}
+
+.el-button.is-circle {
+  padding: 24px;
+  position: relative;
+  bottom: 12px;
 }
 </style>
