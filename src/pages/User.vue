@@ -16,25 +16,25 @@
     </div>
     <div class="nav_item_son">
       <ul class="clearfloat flex-box">
-        <li class="flex-one" v-on:click="goOrders(2)">
+        <li class="flex-one" v-on:click="goOrders(0)">
           <p>
             <img src="../assets/u_nav1-1.png" alt>
-            <span>待发货</span>
+            <span>未支付</span>
           </p>
         </li>
-        <li class="flex-one" v-on:click="goOrders(22)">
+        <li class="flex-one" v-on:click="goOrders(1)">
           <p>
             <img src="../assets/u_nav1-2.png" alt>
-            <span>发货中</span>
+            <span>未发货</span>
           </p>
         </li>
-        <li class="flex-one" v-on:click="goOrders(3)">
+        <li class="flex-one" v-on:click="goOrders(2)">
           <p>
             <img src="../assets/u_nav1-3.png" alt>
             <span>已发货</span>
           </p>
         </li>
-        <li class="flex-one" v-on:click="goOrders(-2)">
+        <li class="flex-one" v-on:click="goOrders(-4)">
           <p>
             <img src="../assets/u_nav1-4.png" alt>
             <span>其他</span>

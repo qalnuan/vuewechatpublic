@@ -5,29 +5,58 @@
       <li @click="order_state(-1)" type="-1" class="flex-one">
         <p v-bind:class="{ cur: state==-1 }">全部</p>
       </li>
+      <li @click="order_state(0)" type="0" class="flex-one">
+        <p v-bind:class="{ cur: state==0 }">未支付</p>
+      </li>
+      <li @click="order_state(1)" type="1" class="flex-one">
+        <p v-bind:class="{ cur: state==1 }">未发货</p>
+      </li>
       <li @click="order_state(2)" type="2" class="flex-one">
-        <p v-bind:class="{ cur: state==2 }">待发货</p>
+        <p v-bind:class="{ cur: state==2 }">已发货</p>
       </li>
-      <li @click="order_state(22)" type="22" class="flex-one">
-        <p v-bind:class="{ cur: state==22 }">发货中</p>
-      </li>
-      <li @click="order_state(3)" type="3" class="flex-one">
-        <p v-bind:class="{ cur: state==3 }">已发货</p>
-      </li>
-      <li @click="order_state(-2)" type="-2" class="flex-one">
-        <p v-bind:class="{ cur: state==-2 }">其他</p>
+      <li @click="order_state(-4)" type="-4" class="flex-one">
+        <p v-bind:class="{ cur: state==-4 }">其他</p>
       </li>
     </ul>
+  </div>
+  <div style="margin-top:54px;">
+    <el-row>
+      <el-col v-for="item in orderList" :key="item.id">
+        <el-card :body-style="{ padding: '0px'}">
+          <el-row>
+            <el-col :span="10" style="margin-top: 12px;">
+              <img :src="baseURL + item.cartInfo.productInfo.image" class="image">
+            </el-col>
+              <el-col :span="14">
+                <div style="padding: 4px;">
+                  <div style="text-size:13px;">
+                    <span style="font-size:10px;">{{item.cartInfo.productInfo.store_name}}</span>
+                  </div>
+                  <div style="color:orange;text-align:left;text-size:13px;">
+                    <span>{{'¥' + item.cartInfo.productInfo.price}}</span>
+                  </div>
+                </div>
+              </el-col>
+          </el-row>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </div>
 </template>
 
 <script>
+import request from '../utils/request'
 export default {
   name: "Orders",
+  created() {
+    this.getOrders()
+  },
   data() {
     return {
-      state: this.$route.params.state
+      baseURL: process.env.VUE_APP_API_URL + ':10000',
+      state: this.$route.params.state,
+      orderList: []
     };
   },
 
@@ -41,6 +70,25 @@ export default {
     order_state(tab, event) {
       console.log(tab, event);
       this.state = tab
+      this.getOrders()
+    },
+    getOrders() {
+      let params = {
+        'type': this.state
+      }
+      if (-1 == this.state) {
+        params = {}
+      }
+      request({
+        url: '/routine/auth_api/get_user_order_list',
+        method: 'post',
+        params: params
+      }).then(res => {
+        console.log(JSON.stringify(res))
+        this.orderList = res.data;
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 }
@@ -104,5 +152,16 @@ dl {
 .order_title>ul>li>p.cur {
   color: #ff834c;
   border-bottom: 2px solid #ff834c;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
 }
 </style>

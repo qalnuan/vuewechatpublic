@@ -6,9 +6,12 @@
 </template>
 
 <script>
-
+import request from '../utils/request'
 export default {
   name: "Address",
+  created() {
+    this.getUserAddressList()
+  },
   data() {
     return {};
   },
@@ -26,6 +29,19 @@ export default {
         name: "AddAddress",
         params: {}
       });
+    },
+    getUserAddressList() {
+      
+      request({
+        url: '/routine/auth_api/user_address_list',
+        method: 'post',
+        params: {}
+      }).then(res => {
+        console.log(JSON.stringify(res))
+        this.orderList = res.data;
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 }
