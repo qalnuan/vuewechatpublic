@@ -46,6 +46,3 @@ export function removeUserInfo () {
   storage.remove(UserInfoKey)
   return {}
 }
-
-
-

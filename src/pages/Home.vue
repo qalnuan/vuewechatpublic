@@ -1,7 +1,7 @@
 <template>
 <el-container class="container-home">
   <el-container v-if="isSearch">
-    <el-header style="height: 36px; margin: 6px 0;">
+    <el-header style="position:fixed; left:0px; top:0px; z-index:100; padding-top:6px; background-color:white;width:100%;">
       <el-row :gutter="20">
         <el-col :span="10">
           <div class="title-left">
@@ -20,18 +20,18 @@
       </el-row>
     </el-header>
 
-    <el-main style="padding:2px">
+    <el-main style="padding:2px;margin-top:4em;margin-bottom:4em;">
       <el-carousel :interval="3000" arrow="hover">
-        <el-carousel-item v-for="item in backImgs" :key="item">
-          <img style="width:100%;height:100%" :src="item.url" />
+        <el-carousel-item v-for="item in banners" :key="item.id" @click="goDetail(item)">
+          <img style="width:100%;height:100%" :src="baseURL + item.pic"/>
         </el-carousel-item>
       </el-carousel>
       <el-card class="box-card">
         <el-row :gutter="30">
-          <el-col :span="6" v-for="item in selectItems" :key="item">
-            <div class="select-div">
-              <img :src="item.image" class="select-img">
-              <div><span>{{item.title}}</span></div>
+          <el-col :span="6" v-for="item in selectItems" :key="item.id">
+            <div class="select-div" @click="goDetail(item)">
+              <img :src="baseURL + item.image" class="select-img">
+              <div><span>{{item.store_name}}</span></div>
             </div>
           </el-col>
         </el-row>
@@ -41,22 +41,22 @@
         <el-button class="look-more" type="text">查看更多>></el-button>
       </div>
       <el-row>
-        <el-col v-for="o in 5" :key="o">
-          <el-card :body-style="{ padding: '0px' }" @click.native="goDetail(o)">
+        <el-col v-for="item in hotItems" :key="item.id" @click.native="goDetail(item)">
+          <el-card :body-style="{ padding: '0px' }">
             <el-row>
               <el-col :span="10" style="margin-top: 12px;">
                 <div style="position:absolute; z-index:2; background-color:rgba(0, 0, 0, 0.5); color:white;">
-                  销售量
+                  {{'销售量' + item.sort}}
                 </div>
-                <img src="../assets/product.jpg" class="image">
+                <img :src="baseURL + item.image" class="image">
             </el-col>
                 <el-col :span="14">
                   <div style="padding: 4px;">
                     <div style="text-size:13px;">
-                      <span style="font-size:10px;">【福州网红火锅店】雄柒映象火锅~会跳舞的火锅店~鸳鸯子母锅~仅￥9.9元兑换100元菜金抵用券~火锅、小吃可以放心点啦~~</span>
+                      <span style="font-size:10px;">{{item.store_name}}</span>
                     </div>
                     <div style="color:orange;text-align:left;text-size:13px;">
-                      <span>¥9.9</span>
+                      <span>{{'¥' + item.price}}</span>
                     </div>
                   </div>
                 </el-col>
@@ -82,50 +82,19 @@
 </template>
 
 <script>
+import request from '../utils/request'
 export default {
   name: "Home",
+  created() {
+    this.getHomeInfo()
+  },
   data() {
     return {
       isSearch: true,
-      backImgs: [{
-          url: "./static/bg1.jpg"
-        },
-        {
-          url: "./static/bg2.jpg"
-        },
-        {
-          url: "./static/bg3.png"
-        }
-      ],
-      selectItems: [{
-          image: "./static/btn.png",
-          title: "专区1"
-        },
-        {
-          image: "./static/btn.png",
-          title: "专区2"
-        },
-        {
-          image: "./static/btn.png",
-          title: "专区3"
-        },
-        {
-          image: "./static/btn.png",
-          title: "专区4"
-        },
-        {
-          image: "./static/btn.png",
-          title: "专区5"
-        },
-        {
-          image: "./static/btn.png",
-          title: "专区6"
-        },
-        {
-          image: "./static/btn.png",
-          title: "专区7"
-        }
-      ]
+      baseURL: process.env.VUE_APP_API_URL + ':10000',
+      banners: [],
+      selectItems: [],
+      hotItems: []
     };
   },
   methods: {
@@ -135,11 +104,13 @@ export default {
     searchToHome: function (event) {
       this.isSearch = true;
     },
-    goDetail: function (event, item) {
+    goDetail: function (item) {
       this.$router.push({
         path: "/detail",
         name: "Detail",
-        params: {}
+        params: {
+          'id': item.id
+        }
       });
     },
     goUser: function (event) {
@@ -148,6 +119,21 @@ export default {
         name: "User",
         params: {}
       });
+    },
+    getHomeInfo() {
+      request({
+        url: '/routine/auth_api',
+        method: 'get'
+      }).then(res => {
+        console.log(res)
+        if (res.code === 200) {
+          this.banners = res.data.banner
+          this.selectItems = res.data.best
+          this.hotItems = res.data.hot
+        }
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 };

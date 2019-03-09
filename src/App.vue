@@ -10,4 +10,7 @@ export default {
 };
 </script>
 <style>
+img {
+    content: normal !important;
+}
 </style>

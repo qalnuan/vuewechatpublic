@@ -2,8 +2,8 @@
 <div style="width: 100%;height: 100%;background-color: #f5f5f5;">
   <div class="my_head">
     <div class="info">
-      <img class="hp" :src="headerImg" alt>
-      <p class="name">这是一个很长的名字</p>
+      <img class="hp" :src="userInfo.avatar" alt>
+      <p class="name">{{userInfo.nickname}}</p>
     </div>
   </div>
   <div class="my_content">
@@ -53,11 +53,15 @@
 </template>
 
 <script>
+import request from '../utils/request'
 export default {
   name: "User",
+  created() {
+    this.getUserInfo()
+  },
   data() {
     return {
-      headerImg: './static/tou.png'
+      userInfo: {}
     };
   },
   methods: {
@@ -77,6 +81,19 @@ export default {
         name: "Set",
         params: {}
       });
+    },
+    getUserInfo() {
+      request({
+        url: '/routine/auth_api/get_user_info',
+        method: 'get'
+      }).then(res => {
+        console.log(res)
+        if (res.code === 200) {
+          this.userInfo = res.data
+        }
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 };

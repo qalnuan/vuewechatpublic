@@ -3,7 +3,7 @@ import axios from 'axios'
 import store from '../store/index'
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_API_URL, // api的base_url
+  baseURL: process.env.VUE_APP_API_URL + ':10000', // api的base_url
   timeout: 5000 // request timeout
 })
 
@@ -19,6 +19,7 @@ service.interceptors.request.use(config => {
 
 //  http 响应拦截器
 service.interceptors.response.use(response => {
+  console.log('resopone:' + response)
   const res = response.data
   if (res.status === 0 && (res.errCode === 401 || res.errCode === 403)) {
     store.dispatch('setLoginStatus', 0)

@@ -26,18 +26,17 @@ export const loginWechatAuth = function ({commit, state}, query) {
   }))
 }
 
-//设置状态
+// 设置状态
 export const setLoginStatus = function ({commit, state}, query) {
   if (query == 0 || query == 1) {
-    //上线打开注释，本地调试注释掉
+    // 上线打开注释，本地调试注释掉
     removeToken()
     removeUserInfo()
   }
   commit(types.SET_LOGIN_STATUS, saveLoginStatus(query))
 }
 
-//保存用户个人信息
+// 保存用户个人信息
 export const setUserInfo = function ({commit, state}, query) {
   commit(types.SET_USERINFO, saveUserInfo(query))
 }
-
