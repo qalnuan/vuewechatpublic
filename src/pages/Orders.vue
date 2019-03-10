@@ -21,7 +21,7 @@
   </div>
   <div style="margin-top:54px;">
     <el-row>
-      <el-col v-for="item in orderList" :key="item.id">
+      <el-col v-for="item in orderList" :key="item.id" @click.native="goOrderDetail(item)">
         <el-card :body-style="{ padding: '0px'}">
           <el-row>
             <el-col :span="10" style="margin-top: 12px;">
@@ -64,8 +64,6 @@ export default {
 
   computed: {},
 
-  mounted: {},
-
   methods: {
     order_state(tab, event) {
       console.log(tab, event);
@@ -89,6 +87,15 @@ export default {
       }).catch(error => {
         console.log(error)
       })
+    },
+    goOrderDetail: function (item) {
+      this.$router.push({
+        path: "/orderdetail",
+        name: "OrderDetail",
+        params: {
+          'orderid': item.order_id
+        }
+      });
     }
   }
 }

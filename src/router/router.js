@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/pages/Home'
 import Detail from '@/pages/Detail'
+import OrderDetail from '@/pages/OrderDetail'
 import User from '@/pages/User'
 import Orders from '@/pages/Orders'
 import Set from '@/pages/Set'
@@ -29,6 +30,10 @@ export default new Router({
     path: '/orders',
     name: 'Orders',
     component: Orders
+  }, {
+    path: '/orderdetail',
+    name: 'OrderDetail',
+    component: OrderDetail
   }, {
     path: '/set',
     name: 'Set',

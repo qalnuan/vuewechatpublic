@@ -1,13 +1,13 @@
 <!-- 设置页面 -->
 <template>
 <div>
-  <div class="more-title el-card__header el-card" v-on:click="goAddress()">
+  <div class="more-title el-card__header el-card" v-on:click="goAddress">
     <i class="icon address"></i><span class="title-font">地址管理</span>
     <span class="lookAll">
       <i class="sign"></i>
     </span>
   </div>
-  <div class="more-title el-card__header el-card" v-on:click="goInfo()">
+  <div class="more-title el-card__header el-card" v-on:click="goInfo">
     <i class="icon info"></i><span class="title-font">版本信息</span>
     <span class="lookAll">
       <i class="sign"></i>
@@ -26,8 +26,6 @@ export default {
   components: {},
 
   computed: {},
-
-  mounted: {},
 
   methods: {
     goAddress: function (event) {

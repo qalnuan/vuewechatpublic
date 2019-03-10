@@ -21,10 +21,10 @@
     <div style="background-color:gray;width:100%;margin: 12px 0px;padding:12px 0px;">
       <span style="font-size:36px;font-weight:bold;margin-left:12px;">商品详情</span>
     </div>
-    <div v-html="productInfo.storeInfo.description"/>
+    <div v-html="productInfo.storeInfo.description" />
   </el-main>
   <el-footer style="position:fixed; left:0px; bottom:0px; width:100%; height:auto; z-index:100;">
-    <bottom-button label="立即抢购" v-on:click="buyProduct()"></bottom-button>
+    <bottom-button label="立即抢购" v-on:click="buyProduct"></bottom-button>
   </el-footer>
 </el-container>
 </template>
@@ -40,7 +40,11 @@ export default {
     return {
       baseURL: process.env.VUE_APP_API_URL + ':10000',
       productId: this.$route.params.id,
-      productInfo: {}
+      productInfo: {
+        storeInfo: {
+          slider_image: []
+        }
+      }
     };
   },
   methods: {
@@ -58,8 +62,8 @@ export default {
         console.log(error)
       })
     },
-    buyProduct: function () {
-        
+    buyProduct: function (event) {
+
     }
   }
 };
