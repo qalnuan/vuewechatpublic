@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import request from '../utils/request'
+import { getHomeInfoReq } from '../api/apiauth'
 export default {
   name: "Home",
   created() {
@@ -94,6 +94,7 @@ export default {
       baseURL: process.env.VUE_APP_API_URL + ':10000',
       banners: [],
       selectItems: [],
+      userInfo: {},
       hotItems: []
     };
   },
@@ -121,11 +122,8 @@ export default {
       });
     },
     getHomeInfo() {
-      request({
-        url: '/routine/auth_api',
-        method: 'get'
-      }).then(res => {
-        console.log(res)
+      getHomeInfoReq().then(res => {
+        console.log(JSON.stringify(res))
         if (res.code === 200) {
           this.banners = res.data.banner
           this.selectItems = res.data.best

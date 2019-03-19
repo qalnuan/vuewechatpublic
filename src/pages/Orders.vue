@@ -46,7 +46,9 @@
 </template>
 
 <script>
-import request from '../utils/request'
+import {
+  getOrdersReq
+} from '../api/apiauth'
 export default {
   name: "Orders",
   created() {
@@ -77,11 +79,7 @@ export default {
       if (-1 == this.state) {
         params = {}
       }
-      request({
-        url: '/routine/auth_api/get_user_order_list',
-        method: 'post',
-        params: params
-      }).then(res => {
+      getOrdersReq(params).then(res => {
         console.log(JSON.stringify(res))
         this.orderList = res.data;
       }).catch(error => {

@@ -2,7 +2,7 @@
 <div style="width: 100%;height: 100%;background-color: #f5f5f5;">
   <div class="my_head">
     <div class="info">
-      <img class="hp" :src="userInfo.avatar" alt>
+      <img class="hp" :src="userInfo.headimgurl" alt>
       <p class="name">{{userInfo.nickname}}</p>
     </div>
   </div>
@@ -53,7 +53,9 @@
 </template>
 
 <script>
-import request from '../utils/request'
+import {
+  getUserInfoReq
+} from '../api/apiauth'
 export default {
   name: "User",
   created() {
@@ -83,10 +85,7 @@ export default {
       });
     },
     getUserInfo() {
-      request({
-        url: '/routine/auth_api/get_user_info',
-        method: 'get'
-      }).then(res => {
+      getUserInfoReq().then(res => {
         console.log(res)
         if (res.code === 200) {
           this.userInfo = res.data

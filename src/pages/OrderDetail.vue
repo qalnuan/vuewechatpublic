@@ -72,7 +72,9 @@
 </template>
 
 <script>
-import request from '../utils/request'
+import {
+  getOrderDetailReq
+} from '../api/apiauth'
 export default {
   name: "OrderDetail",
   created() {
@@ -98,13 +100,10 @@ export default {
   },
   methods: {
     getOrderDetail: function () {
-      request({
-        url: '/routine/auth_api/get_order',
-        method: 'post',
-        params: {
-          'uni': this.orderid
-        }
-      }).then(res => {
+      let params = {
+        'uni': this.orderid
+      }
+      getOrderDetailReq(params).then(res => {
         console.log(JSON.stringify(res))
         this.orderInfo = res.data;
       }).catch(error => {

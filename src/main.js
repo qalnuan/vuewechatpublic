@@ -17,7 +17,7 @@ const qs = require('qs')
 
 router.beforeEach((to, from, next) => {
   console.log(JSON.stringify(store.state))
-  store.dispatch('setLoginStatus', 2)
+  // store.dispatch('setLoginStatus', 2)
   if (store.state.loginStatus === '0' || store.state.loginStatus === 0) {
     console.log('未授权流程')
     //  微信未授权登录跳转到授权登录页面
@@ -40,23 +40,21 @@ router.beforeEach((to, from, next) => {
   } else if (store.state.loginStatus === '1' || store.state.loginStatus === 1) {
     console.log('已授权流程')
     try {
-      wechatAuth.returnFromWechat(to.fullPath)
+      wechatAuth.returnFromWechat(window.location.href)
     } catch (err) {
       store.dispatch('setLoginStatus', 0)
       console.log(err)
-      next()
     }
     store.dispatch('loginWechatAuth', wechatAuth.code).then((res) => {
-      console.log('res:' + res)
-      if (res.status === 1) {
+      console.log('res:' + JSON.stringify(res))
+      if (res.code === 200) {
         store.dispatch('setLoginStatus', 2)
+        next()
       } else {
         store.dispatch('setLoginStatus', 0)
       }
-      next()
     }).catch((err) => {
       console.log(err)
-      next()
     })
   } else {
     next()

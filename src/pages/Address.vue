@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import request from '../utils/request'
+import { getAddressListReq } from '../api/apiauth'
 export default {
   name: "Address",
   created() {
@@ -31,12 +31,7 @@ export default {
       });
     },
     getUserAddressList() {
-      
-      request({
-        url: '/routine/auth_api/user_address_list',
-        method: 'post',
-        params: {}
-      }).then(res => {
+      getAddressListReq().then(res => {
         console.log(JSON.stringify(res))
         this.orderList = res.data;
       }).catch(error => {

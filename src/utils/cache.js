@@ -37,6 +37,10 @@ export function loadUserInfo () {
   return storage.get(UserInfoKey, {})
 }
 
+export function getUid () {
+  return storage.get(UserInfoKey, {})['uid']
+}
+
 export function saveUserInfo (userInfo) {
   storage.set(UserInfoKey, userInfo)
   return userInfo

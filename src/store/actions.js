@@ -8,15 +8,17 @@ import {
   removeUserInfo,
 } from '../utils/cache'
 
-//登录相关
+// 登录相关
 export const loginWechatAuth = function ({commit, state}, query) {
   let data = {
     code: query,
   }
-  return new Promise(((resolve, reject) => {
+  return new Promise (((resolve, reject) => {
+    console.log(data)
     loginByCode(data).then(res => {
-      if (res.status == 1) {
-        commit(types.SET_USERINFO, saveUserInfo(res.data.userInfo))
+      console.log(JSON.stringify(res))
+      if (res.code === 200) {
+        commit(types.SET_USERINFO, saveUserInfo(res.data))
         commit(types.SET_TOKEN, saveToken(res.data.accessToken))
       }
       resolve(res)

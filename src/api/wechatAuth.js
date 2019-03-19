@@ -11,9 +11,10 @@ import request from '../utils/request'
  *       }
  */
 export function loginByCode (data) {
+  console.log('loginByCode:' + JSON.stringify(data))
   return request({
-    url: '/auth/wechat',
+    url: '/routine/login',
     method: 'post',
-    data: data,
+    params: data
   })
 }

@@ -30,7 +30,9 @@
 </template>
 
 <script>
-import request from '../utils/request'
+import {
+  getProductInfoReq
+} from '../api/apiauth'
 export default {
   name: "Detail",
   created() {
@@ -49,13 +51,10 @@ export default {
   },
   methods: {
     getProductInfo: function () {
-      request({
-        url: '/routine/auth_api/details',
-        method: 'post',
-        params: {
-          'id': this.productId
-        }
-      }).then(res => {
+      let param = {
+        'id': this.productId
+      }
+      getProductInfoReq(param).then(res => {
         console.log(res)
         this.productInfo = res.data;
       }).catch(error => {
