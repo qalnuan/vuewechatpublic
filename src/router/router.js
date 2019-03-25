@@ -9,6 +9,7 @@ import Set from '@/pages/Set'
 import Address from '@/pages/Address'
 import Info from '@/pages/Info'
 import AddAddress from '@/pages/AddAddress'
+import ConfirmOrder from '@/pages/ConfirmOrder'
 
 Vue.use(Router)
 
@@ -50,5 +51,9 @@ export default new Router({
     path: '/addaddress',
     name: 'AddAddress',
     component: AddAddress
+  }, {
+    path: '/confirmorder',
+    name: 'ConfirmOrder',
+    component: ConfirmOrder
   }]
 })

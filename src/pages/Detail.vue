@@ -55,14 +55,20 @@ export default {
         'id': this.productId
       }
       getProductInfoReq(param).then(res => {
-        console.log(res)
+        console.log(JSON.stringify(res))
         this.productInfo = res.data;
       }).catch(error => {
         console.log(error)
       })
     },
     buyProduct: function (event) {
-
+      this.$router.push({
+        path: "/confirmorder",
+        name: "ConfirmOrder",
+        params: {
+          productInfo: this.productInfo
+        }
+      });
     }
   }
 };

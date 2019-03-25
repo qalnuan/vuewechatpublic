@@ -1,7 +1,5 @@
 import request from '../utils/request'
-import {
-  loadUserInfo
-} from '../utils/cache'
+import { loadUserInfo } from '../utils/cache'
 
 function getUserInfo () {
   return loadUserInfo()
@@ -80,6 +78,33 @@ export function getAddressListReq (params) {
   params['uid'] = getUserInfo()['uid']
   return request({
     url: '/routine/auth_api/user_address_list',
+    method: 'post',
+    params: params
+  })
+}
+
+/**
+ * 获取地址信息
+ * @param {*} params 参数
+ */
+export function getUserAddressReq () {
+  return request({
+    url: '/routine/auth_api/user_default_address',
+    method: 'post',
+    params: {
+      uid: getUserInfo()['uid']
+    }
+  })
+}
+
+/**
+ * 购买产品
+ * @param {*} params 参数
+ */
+export function buyProductReq (params) {
+  params['uid'] = getUserInfo()['uid']
+  return request({
+    url: '/routine/auth_api/create_order_new',
     method: 'post',
     params: params
   })
